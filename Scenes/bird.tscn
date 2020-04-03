@@ -1,0 +1,94 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Sprites/bird_orange_1.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/bird_orange_2.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/bird_orange_0.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/bird.gd" type="Script" id=4]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 1 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "kus",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 6.94361
+
+[sub_resource type="Animation" id=3]
+resource_name = "dsme"
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=4]
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 0 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "flying"
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 3 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 0, 2 ]
+}
+
+[node name="bird" type="RigidBody2D"]
+position = Vector2( 26.2168, 11.574 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "kus"
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="anim" type="AnimationPlayer" parent="."]
+playback_speed = 3.0
+anims/dsme = SubResource( 3 )
+anims/flap = SubResource( 4 )
+anims/flying = SubResource( 5 )
